@@ -31,14 +31,20 @@ public class JWTUtil {
     }
 
     //토큰을 생성
-    public String createJwt(String username, String role, Long expiredMs) {
+    public String createJwt(String username, String role, Long id, Long expiredMs) {
 
         return Jwts.builder()
                 .claim("username", username)
                 .claim("role", role)
+                .claim("id", id)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))
                 .signWith(secretKey)
                 .compact();
+    }
+
+    public Long getId(String token) {
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("id", Long.class);
+
     }
 }

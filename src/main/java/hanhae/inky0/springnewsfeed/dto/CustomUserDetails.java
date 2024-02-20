@@ -36,6 +36,11 @@ public class CustomUserDetails implements UserDetails {
         return userEntity.getPassword();
     }
 
+    public Long getId() {
+
+        return userEntity.getId();
+    }
+
     @Override
     public String getUsername() {
 
@@ -64,5 +69,9 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
 
         return true;
+    }
+
+    public UserEntity getUserEntity(){
+        return userEntity;
     }
 }
