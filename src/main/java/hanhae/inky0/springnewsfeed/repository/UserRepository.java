@@ -2,8 +2,10 @@ package hanhae.inky0.springnewsfeed.repository;
 
 import hanhae.inky0.springnewsfeed.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<UserEntity,Integer> {
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity,Long> {
     Boolean existsByUsername(String username);
 
     UserEntity findByUsername(String username);
