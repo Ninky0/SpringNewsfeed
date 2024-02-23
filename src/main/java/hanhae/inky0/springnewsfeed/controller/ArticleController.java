@@ -24,28 +24,28 @@ public class ArticleController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{productId}")
+    @DeleteMapping("/{articleId}")
     //@AuthenticationPrincipal : 토큰 가져오자
-    public ResponseEntity<Void> deleteArticle(@PathVariable Long productId, @AuthenticationPrincipal CustomUserDetails userDetails ){
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long articleId, @AuthenticationPrincipal CustomUserDetails userDetails ){
 
-        articleService.deleteArticle(productId, userDetails);
+        articleService.deleteArticle(articleId, userDetails);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{productId}")
+    @PutMapping("/{articleId}")
     public ResponseEntity<Void> updateArticle(
-            @PathVariable Long productId,
+            @PathVariable Long articleId,
             @RequestBody ArticleCreateRequest request,
             @AuthenticationPrincipal CustomUserDetails userDetails ){
 
-        articleService.updateArticle(productId, request, userDetails);
+        articleService.updateArticle(articleId, request, userDetails);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{productId}")
-    public ResponseEntity<ArticleResponse> readArticle(@PathVariable Long productId){
+    @GetMapping("/{articleId}")
+    public ResponseEntity<ArticleResponse> readArticle(@PathVariable Long articleId){
 
-        ArticleResponse articleResponse = articleService.readArticle(productId);
+        ArticleResponse articleResponse = articleService.readArticle(articleId);
 
         return ResponseEntity.ok()
                 .body(articleResponse);
