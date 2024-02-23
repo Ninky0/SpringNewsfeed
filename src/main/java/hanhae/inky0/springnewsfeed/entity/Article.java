@@ -7,6 +7,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -27,8 +29,10 @@ public class Article extends BaseTimeEntity{
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username") //사실 여기에 nullable="false"이 들어가야 함
+    @JoinColumn(name = "userId", nullable = false)
     private UserEntity user;
+
+    private Integer likeCount =0;
 
     @Builder
     public Article(String title, String content, UserEntity user) {

@@ -1,6 +1,5 @@
 package hanhae.inky0.springnewsfeed.dto;
 
-import hanhae.inky0.springnewsfeed.entity.Article;
 import hanhae.inky0.springnewsfeed.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
