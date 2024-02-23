@@ -1,6 +1,8 @@
 package hanhae.inky0.springnewsfeed.service;
 
+import hanhae.inky0.springnewsfeed.dto.ArticleResponse;
 import hanhae.inky0.springnewsfeed.dto.CommentCreateRequest;
+import hanhae.inky0.springnewsfeed.dto.CommentResponse;
 import hanhae.inky0.springnewsfeed.dto.CustomUserDetails;
 import hanhae.inky0.springnewsfeed.entity.Article;
 import hanhae.inky0.springnewsfeed.entity.Comment;
@@ -10,6 +12,9 @@ import hanhae.inky0.springnewsfeed.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -71,6 +76,18 @@ public class CommentService {
 
     }
 
+    public List<CommentResponse> readCommentList(Long articleId) {
+        // 해당 게시글의 댓글 목록 조회
+        List<Comment> comments = commentRepository.findAllByArticleId(articleId);
+
+        // 댓글 목록을 CommentResponse DTO로 매핑
+        List<CommentResponse> commentResponses = comments.stream()
+                .map(CommentResponse::new)
+                .collect(Collectors.toList());
+
+        return commentResponses;
+    }
+
     private void checkPermission(UserEntity user, Comment comment){
         Article article = comment.getArticle();
         if(!(comment.isOwner(user) || article.isOwner(user) || user.isAdmin())){
@@ -79,7 +96,6 @@ public class CommentService {
     }
 
     private void checkPermission2(UserEntity user, Comment comment){
-        Article article = comment.getArticle();
         if(!(comment.isOwner(user) || user.isAdmin())){
             throw new IllegalStateException("권한이 없습니다");
         }

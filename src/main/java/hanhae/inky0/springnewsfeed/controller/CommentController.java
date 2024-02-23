@@ -1,13 +1,13 @@
 package hanhae.inky0.springnewsfeed.controller;
 
-import hanhae.inky0.springnewsfeed.dto.ArticleCreateRequest;
-import hanhae.inky0.springnewsfeed.dto.CommentCreateRequest;
-import hanhae.inky0.springnewsfeed.dto.CustomUserDetails;
+import hanhae.inky0.springnewsfeed.dto.*;
 import hanhae.inky0.springnewsfeed.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,6 +45,14 @@ public class CommentController {
 
         commentService.updateComment(commentId, request, userDetails);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CommentResponse>> readCommentList(@PathVariable Long articleId) {
+        List<CommentResponse> commentResponses = commentService.readCommentList(articleId);
+
+        return ResponseEntity.ok()
+                .body(commentResponses);
     }
 
 }
