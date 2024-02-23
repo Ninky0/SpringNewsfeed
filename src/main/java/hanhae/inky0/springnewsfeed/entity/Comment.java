@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.lang.reflect.Member;
-
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Setter
@@ -22,11 +20,11 @@ public class Comment extends BaseTimeEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username") //사실 여기에 nullable="false"이 들어가야 함
+    @JoinColumn(name = "userId") //사실 여기에 nullable="false"이 들어가야 함
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article")
+    @JoinColumn(name = "articleId")
     private Article article;
 
     @Builder

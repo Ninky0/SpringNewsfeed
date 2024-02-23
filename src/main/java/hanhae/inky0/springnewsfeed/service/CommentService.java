@@ -1,6 +1,5 @@
 package hanhae.inky0.springnewsfeed.service;
 
-import hanhae.inky0.springnewsfeed.dto.ArticleResponse;
 import hanhae.inky0.springnewsfeed.dto.CommentCreateRequest;
 import hanhae.inky0.springnewsfeed.dto.CommentResponse;
 import hanhae.inky0.springnewsfeed.dto.CustomUserDetails;
