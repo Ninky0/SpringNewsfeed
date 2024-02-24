@@ -1,7 +1,7 @@
 package hanhae.inky0.springnewsfeed.controller;
 
 import hanhae.inky0.springnewsfeed.dto.CustomUserDetails;
-import hanhae.inky0.springnewsfeed.service.LikesService;
+import hanhae.inky0.springnewsfeed.service.ArticleLikesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/article/{articleId}/likes")
-public class LikesController {
-    private final LikesService likesService;
+@RequestMapping("/articles/{articleId}/articlelikes")
+public class ArticleLikesController {
+    private final ArticleLikesService articleLikesService;
 
     @PostMapping
     public ResponseEntity<Void> upDownLike(@PathVariable("articleId")Long articleId,
                                            @AuthenticationPrincipal CustomUserDetails userDetails ) {
 
         //게시물id랑 사용자 추가
-        likesService.upDownLike(articleId,userDetails);
+        articleLikesService.upDownLike(articleId,userDetails);
         return ResponseEntity.ok().build();
     }
 }

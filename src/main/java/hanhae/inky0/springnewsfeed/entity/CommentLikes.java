@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-public class Likes {
+public class CommentLikes extends BaseTimeEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
@@ -20,9 +21,14 @@ public class Likes {
     @JoinColumn(name = "articleId")
     private Article article;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "commentId")
+    private Comment comment;
+
     @Builder
-    public Likes(UserEntity user, Article article) {
+    public CommentLikes(UserEntity user, Article article, Comment comment) {
         this.user = user;
         this.article = article;
+        this.comment = comment;
     }
 }

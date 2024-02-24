@@ -27,6 +27,8 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "articleId")
     private Article article;
 
+    private Integer likeCount =0;
+
     @Builder
     public Comment(String content, UserEntity user, Article article) {
         this.content = content;
