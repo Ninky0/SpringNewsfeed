@@ -59,7 +59,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/join",
                                 "/articles", "/articles/{articleId}",
-                                "/article/{articleId}/comments"
+                                "/articles/{articleId}/comments"
                         ).permitAll() //해당 경로들은 모든 사람들이 접근 가능
                         .requestMatchers("/admin").hasRole("ADMIN") //ADMIN이란 권한을 가진 사람만 /admin경로 접근 가능
                         .anyRequest().authenticated()); //그 외 접근은 로그인한 사용자만 접근 가능
